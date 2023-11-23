@@ -7,8 +7,10 @@
 
 using namespace std;
 
-#define DELAY_CONST 100000
+#define rows 30
+#define columns 15
 
+#define DELAY_CONST 100000
 
 objPos printPos;
 
@@ -72,6 +74,22 @@ void DrawScreen(void)
     player->getPlayerPos(tempPos);
     MacUILib_printf("BoardSize: %dx%d Player at (%d, %d): %c\n",myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y, tempPos.symbol);
 
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+            if (i == 0 || i == rows - 1 || j == 0 || j == columns - 1)
+            {
+                MacUILib_printf("#");
+            }
+
+            else
+            {
+                MacUILib_printf(" ");
+            }
+        }
+    }
 }
 
 void LoopDelay(void)
@@ -90,5 +108,4 @@ void CleanUp(void)
 
     delete myGM;
 
-    int char s = 'm';
 }
