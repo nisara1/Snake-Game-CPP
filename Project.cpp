@@ -89,4 +89,6 @@ void CleanUp(void)
     delete player;
 
     delete myGM;
+
+    int char s = 'm';
 }
