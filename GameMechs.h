@@ -44,10 +44,7 @@ class GameMechs
         int getBoardSizeX();
         int getBoardSizeY();
 
-        int getScore() const 
-        {
-            return score;
-        }
+        int getScore();
       
 
 };

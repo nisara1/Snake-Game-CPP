@@ -77,5 +77,10 @@ void GameMechs::setLoseFlag()
 {
     loseFlag = true;
 }
+int GameMechs::getScore()
+{
+    return score;
+}
+
 
 
