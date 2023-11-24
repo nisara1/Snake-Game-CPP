@@ -90,9 +90,9 @@ void DrawScreen(void)
                 
 
             }
-            else if
+            else if(i == tempPos.y && j== tempPos.x)
             {
-                
+                MacUILib_printf("%c", tempPos.symbol);
                     
             }
             
