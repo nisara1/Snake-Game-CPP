@@ -7,8 +7,12 @@
 
 using namespace std;
 
-#define rows 30
-#define columns 15
+#define r 15
+#define coln 30
+
+char border[30][15];
+
+
 
 #define DELAY_CONST 100000
 
@@ -49,7 +53,7 @@ void Initialize(void)
 {
     MacUILib_init();
     MacUILib_clearScreen();
-    myGM = new GameMechs(26,13);
+    myGM = new GameMechs(30,15);
     player = new Player(myGM);
 
 }
@@ -74,22 +78,39 @@ void DrawScreen(void)
     player->getPlayerPos(tempPos);
     MacUILib_printf("BoardSize: %dx%d Player at (%d, %d): %c\n",myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y, tempPos.symbol);
 
-
-    for (int i = 0; i < rows; i++)
+    int i,j;
+    for (i=0; i<r; i++)
     {
-        for (int j = 0; j < columns; j++)
+        for (j=0; j<coln; j++)
         {
-            if (i == 0 || i == rows - 1 || j == 0 || j == columns - 1)
+            if (i==0 || i==r-1|| j==0 || j==coln -1)
             {
-                MacUILib_printf("#");
+                border[i][j] = '#';
+                MacUILib_printf("%c", border[i][j]);
+                
+
             }
+            else if
+            {
+                
+                    
+            }
+            
 
             else
             {
-                MacUILib_printf(" ");
+                border[i][j] = ' ';
+                MacUILib_printf("%c", border[i][j] );
+
             }
+
         }
+
+        MacUILib_printf("\n");
+
     }
+
+
 }
 
 void LoopDelay(void)
