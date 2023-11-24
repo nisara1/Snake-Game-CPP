@@ -70,19 +70,20 @@ void GetInput(void)
 void RunLogic(void)
 {
     player->updatePlayerDir();
+    player->movePlayer();
 
     char input = myGM->getInput();
 
     if (input == 't')
     {
         myGM->incrementScore();
-        MacUILib_printf("Score incremented: %d\n ", myGM->getScore());
+        MacUILib_printf("Score incremented: %d ", myGM->getScore());
     }
 
     if (input == 'y')
     {
         myGM->setLoseFlag();
-        MacUILib_printf("Lose flag set. Game over.\n");
+        MacUILib_printf("Lose flag set. Game over.");
     }
 
     myGM->clearInput();
