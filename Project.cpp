@@ -61,10 +61,6 @@ void Initialize(void)
 void GetInput(void)
 {
     char input = myGM->getInput();
-    if(input == 27)
-    {
-        myGM -> setExitTrue();
-    }
 }
 
 void RunLogic(void)
@@ -74,19 +70,12 @@ void RunLogic(void)
 
     char input = myGM->getInput();
 
-    if (input == 't')
+    if(input == 27)
     {
-        myGM->incrementScore();
-        MacUILib_printf("Score incremented: %d ", myGM->getScore());
+        myGM -> setExitTrue();
     }
 
-    if (input == 'y')
-    {
-        myGM->setLoseFlag();
-        MacUILib_printf("Lose flag set. Game over.");
-    }
-
-    myGM->clearInput();
+    myGM->clearInput(); 
 }
 
 void DrawScreen(void)
@@ -94,8 +83,6 @@ void DrawScreen(void)
     MacUILib_clearScreen();
     objPos tempPos;
     player->getPlayerPos(tempPos);
-    MacUILib_printf("BoardSize: %dx%d Player at (%d, %d): %c\n",myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y, tempPos.symbol);
-
     int i,j;
     for (i=0; i<r; i++)
     {
@@ -125,9 +112,9 @@ void DrawScreen(void)
         }
 
         MacUILib_printf("\n");
-       
 
     }
+    MacUILib_printf("BoardSize: %dx%d\n, Player at (%d, %d): %c\n, Score: %d\n",myGM->getBoardSizeX(), myGM->getBoardSizeY(), tempPos.x, tempPos.y, tempPos.symbol, myGM->getScore());
 
 
 }
@@ -140,12 +127,12 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
+    delete player;
+
+    delete myGM;
     MacUILib_clearScreen();    
   
     MacUILib_uninit();
 
-    delete player;
-
-    delete myGM;
 
 }

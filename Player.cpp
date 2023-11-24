@@ -61,7 +61,6 @@ void Player::updatePlayerDir()
             default:
                 break;
         }
-    MacUILib_printf("Updated: %d\n", myDir);
     mainGameMechsRef->clearInput();
 
 }
