@@ -28,13 +28,13 @@ bool GameMechs::getExitFlagStatus()
 
 char GameMechs::getInput()
 {
-    if(MacUILib_hasChar()==1)
+    if(MacUILib_hasChar() == 1)
     {
         input = MacUILib_getChar();
 
     }
 
-    return  input;
+    return input;
 }
 
 int GameMechs::getBoardSizeX()

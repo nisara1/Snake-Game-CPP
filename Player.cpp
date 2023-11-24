@@ -28,31 +28,32 @@ void Player::updatePlayerDir()
 {
     // PPA3 input processing logic 
     char input = mainGameMechsRef->getInput();
+
     switch(input)
         {                      
             case 'w':
-                if(myDir != DOWN)
+                if( myDir != DOWN)
                 {
                     myDir = UP;
 
                 }
                 break;
             case 'a':
-                if(myDir != RIGHT)
+                if( myDir!= RIGHT)
                 {
                     myDir = LEFT;
 
                 }
                 break;
             case 's':
-                if(myDir != UP)
+                if( myDir != UP)
                 {
                     myDir = DOWN;
 
                 }
                 break;
             case 'd':
-                if(myDir != LEFT)
+                if(  myDir != LEFT)
                 {
                     myDir = RIGHT;
 
@@ -60,7 +61,8 @@ void Player::updatePlayerDir()
             default:
                 break;
         }
-        
+    MacUILib_printf("Updated: %d\n", myDir);
+    mainGameMechsRef->clearInput();
 
 }
 
@@ -89,6 +91,29 @@ void Player::movePlayer()
             break;     
 
     }
+
+    if (playerPos.x == 0)
+    {
+        playerPos.x = mainGameMechsRef->getBoardSizeX() -1;
+
+    }
+    else if(playerPos.x >= mainGameMechsRef->getBoardSizeX())
+    {
+        playerPos.x = 1;
+
+    }
+    else if(playerPos.y == 0)
+    {
+        playerPos.y = mainGameMechsRef->getBoardSizeY() -1;
+
+    }
+    else if (playerPos.y >= mainGameMechsRef->getBoardSizeY())
+    {
+        playerPos.y =1;
+
+    }
+
+
 
 
 }
