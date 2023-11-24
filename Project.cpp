@@ -39,8 +39,8 @@ int main(void)
     while(myGM->getExitFlagStatus() == false)  
     {
         GetInput();
-        RunLogic();
         DrawScreen();
+        RunLogic();
         LoopDelay();
     }
 
@@ -60,15 +60,32 @@ void Initialize(void)
 
 void GetInput(void)
 {
-
-   
+    char input = myGM->getInput();
+    if(input == 27)
+    {
+        myGM -> setExitTrue();
+    }
 }
 
 void RunLogic(void)
 {
     player->updatePlayerDir();
 
-    
+    char input = myGM->getInput();
+
+    if (input == 't')
+    {
+        myGM->incrementScore();
+        MacUILib_printf("Score incremented: %d ", myGM->getScore());
+    }
+
+    if (input == 'y')
+    {
+        myGM->setLoseFlag();
+        MacUILib_printf("Lose flag set. Game over.");
+    }
+
+    myGM->clearInput();
 }
 
 void DrawScreen(void)

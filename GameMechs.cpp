@@ -31,6 +31,7 @@ char GameMechs::getInput()
     if(MacUILib_hasChar()==1)
     {
         input = MacUILib_getChar();
+
     }
 
     return  input;
@@ -65,6 +66,16 @@ void GameMechs::clearInput()
 void GameMechs::incrementScore()
 {
     score+=1;
+}
+
+bool GameMechs::getLoseFlagStatus()
+{
+    return loseFlag;
+}
+
+void GameMechs::setLoseFlag()
+{
+    loseFlag = true;
 }
 
 
