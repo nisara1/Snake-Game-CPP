@@ -14,13 +14,14 @@ class Food
         char foodSymbol;
         GameMechs &gameMechs;
         bool foodGenerated;
+        objPosArrayList* playerBodyList;
 
 
     public:
-        Food(GameMechs &gm);
+        Food(GameMechs &gm, objPosArrayList* playerBody);
         ~Food();
 
-        void generateFood(objPos blockOff);
+        void generateFood(objPosArrayList* playerBody); //need to upgrade this. Need to accept player body array list. Go through each array list element to make sure they are all blocked off from random food generation
 
         void getFoodPos(objPos &returnPos);
 

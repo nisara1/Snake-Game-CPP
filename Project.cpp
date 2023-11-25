@@ -101,11 +101,10 @@ void RunLogic(void)
     player->movePlayer();
 
 
-    objPos playerPos;
-    player->getPlayerPos(playerPos);
+    objPosArrayList* playerBodyList;
+    player->getPlayerPos(playerBodyList);  
+    food->generateFood(playerBodyList);
 
-
-    food->generateFood(playerPos);
 
     myGM->clearInput(); 
 
@@ -173,7 +172,7 @@ void LoopDelay(void)
 void CleanUp(void)
 {
     delete player;
-
+    delete food;
     delete myGM;
     MacUILib_clearScreen();    
   
