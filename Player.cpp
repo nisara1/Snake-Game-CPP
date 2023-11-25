@@ -2,7 +2,11 @@
 #include "MacUILib.h"
 #include "objPosArrayList.h"
 #include "time.h"
+#include "Food.h"
+#include "objPos.h"
+#include "GameMechs.h"
 
+extern Food* food;
 
 Player::Player(GameMechs* thisGMRef)
 {
@@ -80,6 +84,29 @@ void Player::updatePlayerDir()
 
 }
 
+bool Player::checkFoodConsumption()
+{
+    objPos headpos;
+    playerPosList->getHeadElement(headpos);
+
+    objPos foodPos;
+    food->getFoodPos(foodPos);
+
+    if(headpos.x==foodPos.x && headpos.y==foodPos.y)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+void Player::increasePlayerLength()
+{
+    objPos currHead;
+    playerPosList->getHeadElement(currHead);
+    playerPosList->insertHead(currHead);
+}
+
 void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
@@ -99,7 +126,7 @@ void Player::movePlayer()
             break;
         case DOWN:
             currHead.y++;
-            if(currHead.y >= mainGameMechsRef->getBoardSizeY())
+            if(currHead.y >= mainGameMechsRef->getBoardSizeY()-1)
                 currHead.y = 1;
             break;
         case LEFT:
@@ -109,7 +136,7 @@ void Player::movePlayer()
             break;
         case RIGHT:
             currHead.x++;
-            if(currHead.x >= mainGameMechsRef->getBoardSizeX())
+            if(currHead.x >= mainGameMechsRef->getBoardSizeX()-1)
                 currHead.x = 1;
             break;
         
@@ -119,8 +146,17 @@ void Player::movePlayer()
 
     playerPosList->insertHead(currHead);
 
-    playerPosList->removeTail();
+    if(checkFoodConsumption())
+    {
+        increasePlayerLength();
 
+        food->generateFood(currHead);
+        food->resetFood();
+    }
+    else
+    {
+        playerPosList->removeTail();
+    }
 
 }
 
