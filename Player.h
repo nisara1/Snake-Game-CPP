@@ -19,12 +19,28 @@ class Player
         Player(GameMechs* thisGMRef);
         ~Player();
 
-        void getPlayerPos(objPos &returnPos); // Upgrade this in iteration 3.
+        objPosArrayList* getPlayerPos(); // Upgrade this in iteration 3.
         void updatePlayerDir();
         void movePlayer();
 
+        // Need more actions
+        // after inserting head and before removing tail
+        // -check if new head position collides with food
+        // - if yes increment the score if GM and genertate new food and  do not remove tial
+        //- otherwise remove tail and move on
+
+
+        //Lastly add self collision check
+        // if self collided set loosFelag anf exit flag to true (through GM)
+        //this will break program loop and end game
+
+        //- if ending, you need to differentiate the end game state
+        // LOST - display lost message
+        // otherwise, display ENDGAME messgage only
+
+
     private:
-        objPos playerPos;   // Upgrade this in iteration 3.       
+        objPosArrayList *playerPosList;   // Upgrade this in iteration 3.       
         enum Dir myDir;
 
         // Need a reference to the Main Game Mechanisms

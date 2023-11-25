@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "MacUILib.h"
+#include "objPosArrayList.h"
+#include "time.h"
 
 
 Player::Player(GameMechs* thisGMRef)
@@ -8,20 +10,32 @@ Player::Player(GameMechs* thisGMRef)
     myDir = STOP;
 
     // more actions to be included
-    int intialX = mainGameMechsRef->getBoardSizeX()/2;
-    int intialY = mainGameMechsRef->getBoardSizeY()/2;
-    playerPos.setObjPos(intialX, intialY, '*');
+    objPos tempPos;
+    tempPos.setObjPos(mainGameMechsRef->getBoardSizeX()/2,  mainGameMechsRef->getBoardSizeY()/2, '*'); //simpler way can be written
+
+    playerPosList = new objPosArrayList();
+    playerPosList->insertHead(tempPos);
+
+
+    playerPosList->insertHead(tempPos);
+    playerPosList->insertHead(tempPos);
+    playerPosList->insertHead(tempPos);
+    playerPosList->insertHead(tempPos);
+
+
+
 }
 
 Player::~Player()
 {
 // leave it empty for now
+    delete playerPosList;
 }
 
-void Player::getPlayerPos(objPos &returnPos)
+objPosArrayList* Player::getPlayerPos()
 {
     // return the reference to the playerPos arrray list
-    returnPos.setObjPos(playerPos.x, playerPos.y, playerPos.symbol);
+    return playerPosList;
 }
 
 void Player::updatePlayerDir()
@@ -32,21 +46,21 @@ void Player::updatePlayerDir()
     switch(input)
         {                      
             case 'w':
-                if( myDir != DOWN)
+                if(myDir != DOWN)
                 {
                     myDir = UP;
 
                 }
                 break;
             case 'a':
-                if( myDir!= RIGHT)
+                if(  myDir!= RIGHT)
                 {
                     myDir = LEFT;
 
                 }
                 break;
             case 's':
-                if( myDir != UP)
+                if(  myDir != UP)
                 {
                     myDir = DOWN;
 
@@ -58,6 +72,7 @@ void Player::updatePlayerDir()
                     myDir = RIGHT;
 
                 }
+                break;
             default:
                 break;
         }
@@ -69,50 +84,42 @@ void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
 
+    objPos newHead;
+    objPos currHead;
+    playerPosList->getHeadElement(currHead);
+
     switch(myDir)
     {
         case STOP:
             break;
         case UP:
-            playerPos.y--;
+            currHead.y--;
+            if(currHead.y <= 0)
+                currHead.y = mainGameMechsRef->getBoardSizeY() -2;
             break;
         case DOWN:
-            playerPos.y++;
+            currHead.y++;
+            if(currHead.y >= mainGameMechsRef->getBoardSizeY())
+                currHead.y = 1;
             break;
         case LEFT:
-            playerPos.x--;
+            currHead.x--;
+            if(currHead.x <= 0)
+                currHead.x = mainGameMechsRef->getBoardSizeX() -2;
             break;
         case RIGHT:
-            playerPos.x++;
+            currHead.x++;
+            if(currHead.x >= mainGameMechsRef->getBoardSizeX())
+                currHead.x = 1;
             break;
         
         default:
             break;     
-
     }
 
-    if (playerPos.x == 0)
-    {
-        playerPos.x = mainGameMechsRef->getBoardSizeX() -1;
+    playerPosList->insertHead(currHead);
 
-    }
-    else if(playerPos.x >= mainGameMechsRef->getBoardSizeX())
-    {
-        playerPos.x = 1;
-
-    }
-    else if(playerPos.y == 0)
-    {
-        playerPos.y = mainGameMechsRef->getBoardSizeY() -1;
-
-    }
-    else if (playerPos.y >= mainGameMechsRef->getBoardSizeY())
-    {
-        playerPos.y =1;
-
-    }
-
-
+    playerPosList->removeTail();
 
 
 }
