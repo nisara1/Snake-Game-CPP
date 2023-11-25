@@ -3,6 +3,7 @@
 #include "objPos.h"
 #include "Player.h"
 #include "GameMechs.h"
+#include "Food.h"
 
 
 using namespace std;
@@ -21,6 +22,7 @@ objPos printPos;
 
 GameMechs* myGM;
 Player* player;
+Food* food;
 
 void Initialize(void);
 void GetInput(void);
@@ -55,6 +57,10 @@ void Initialize(void)
     MacUILib_clearScreen();
     myGM = new GameMechs(30,15);
     player = new Player(myGM);
+    food = new Food(*myGM); 
+    srand(time(NULL));
+
+    
 
 }
 
@@ -65,9 +71,6 @@ void GetInput(void)
 
 void RunLogic(void)
 {
-    player->updatePlayerDir();
-    player->movePlayer();
-
     char input = myGM->getInput();
 
     if(input == 27)
@@ -75,7 +78,37 @@ void RunLogic(void)
         myGM -> setExitTrue();
     }
 
+    if (input == 'r') 
+    {
+        food->resetFood();
+    }
+
+    if (input == 't')
+    {
+        myGM->incrementScore();
+        MacUILib_printf("score is:%d",myGM->getScore());
+    }
+
+    if (input == 'y')
+    {
+        myGM->setLoseFlag();
+        MacUILib_printf("better luck next time");
+    }
+
+
+
+    player->updatePlayerDir();
+    player->movePlayer();
+
+
+    objPos playerPos;
+    player->getPlayerPos(playerPos);
+
+
+    food->generateFood(playerPos);
+
     myGM->clearInput(); 
+
 }
 
 void DrawScreen(void)
@@ -84,6 +117,12 @@ void DrawScreen(void)
     objPos tempPos;
     player->getPlayerPos(tempPos);
     int i,j;
+    objPos playerPos;
+    player->getPlayerPos(playerPos);
+
+    objPos foodPos;
+    food->getFoodPos(foodPos);
+    
     for (i=0; i<r; i++)
     {
         for (j=0; j<coln; j++)
@@ -100,6 +139,11 @@ void DrawScreen(void)
                 MacUILib_printf("%c", tempPos.symbol);
                     
             }
+
+            else if (i == foodPos.y && j == foodPos.x)
+            {
+                MacUILib_printf("%c", foodPos.symbol);
+            }
             
 
             else
@@ -108,6 +152,7 @@ void DrawScreen(void)
                 MacUILib_printf("%c", border[i][j] );
 
             }
+
 
         }
 
