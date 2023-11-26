@@ -173,7 +173,7 @@ void DrawScreen(void)
         MacUILib_printf("\n");
 
     }
-    MacUILib_printf("BoardSize: %dx%d\n, Score: %d\n, FoodPos: (%d, %d), Snake Size: %d" ,myGM->getBoardSizeX(), myGM->getBoardSizeY(),  myGM->getScore(), foodPos.y, foodPos.x, playerBody->getSize());
+    MacUILib_printf("BoardSize: %dx%d\n  FoodPos: (%d, %d) Score: %d" ,myGM->getBoardSizeX(), myGM->getBoardSizeY(), foodPos.y, foodPos.x, playerBody->getSize()-1);
 
 
 }

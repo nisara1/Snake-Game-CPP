@@ -45,7 +45,7 @@ void Food::generateFood( objPosArrayList &playerPosList)
 
         } while (overlap);
 
-        foodPos.setObjPos(rnx, rny, 'o');
+        foodPos.setObjPos(rnx, rny, 'O');
         foodGenerated = true;
     }
 }

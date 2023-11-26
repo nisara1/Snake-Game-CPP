@@ -52,6 +52,7 @@ int GameMechs::getBoardSizeY()
 void GameMechs::setExitTrue()
 {
     exitFlag = true;
+    MacUILib_printf(" Game Over!");
 }
 
 void GameMechs::setInput(char this_input)
@@ -77,6 +78,7 @@ bool GameMechs::getLoseFlagStatus()
 void GameMechs::setLoseFlag()
 {
     loseFlag = true;
+    MacUILib_printf(" You Lost buddy =(, Run it back turbo ");
 }
 int GameMechs::getScore()
 {

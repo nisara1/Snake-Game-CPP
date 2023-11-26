@@ -25,6 +25,7 @@ class Player
         void movePlayer();
         bool checkFoodConsumption();
         void increasePlayerLength();
+        bool checkSelfCollision();
 
         // Need more actions
         // after inserting head and before removing tail

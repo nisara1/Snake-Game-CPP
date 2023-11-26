@@ -104,6 +104,27 @@ void Player::increasePlayerLength()
     playerPosList->removeTail();
 }
 
+bool Player::checkSelfCollison()
+{
+    objPos newHead;
+    objPos currHead;
+    playerPosList->getHeadElement(currHead);
+
+    for(int i = 0; i<playerPosList->getSize(); ++i)
+    {
+        objPos BodyP;
+        playerPosList->getElement(BodyP, i);
+        if(currHead.x == bodyP.x && currHead.y == bodyP.y)
+        {
+            return true;
+
+        }
+
+    }
+    return false;
+
+}
+
 void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
@@ -156,5 +177,10 @@ void Player::movePlayer()
         playerPosList->removeTail();
     }
 
+    if(checkSelfCollison())
+    {
+        myGM->setLoseFlag();
+        myGM->setExitTrue();
+    }
 }
 
