@@ -162,7 +162,6 @@ void Player::movePlayer()
     {
         myGM->setLoseFlag();
         myGM->setExitTrue();
-        MacUILib_printf("Game Over");
         return;
     }
 
@@ -172,7 +171,6 @@ void Player::movePlayer()
     if(checkFoodConsumption())
     {
         increasePlayerLength();
-
         food->generateFood(*playerPosList);
         food->resetFood();
         myGM->incrementScore();

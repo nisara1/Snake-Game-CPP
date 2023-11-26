@@ -186,6 +186,8 @@ void LoopDelay(void)
 void CleanUp(void)
 {
     MacUILib_clearScreen();
+
+    MacUILib_printf("Game Over, Better Luck Next Time");
     MacUILib_uninit();
 
     delete player;
