@@ -7,6 +7,7 @@
 #include "GameMechs.h"
 
 extern Food* food;
+extern GameMechs* myGM;
 
 Player::Player(GameMechs* thisGMRef)
 {
@@ -148,6 +149,7 @@ void Player::movePlayer()
 
         food->generateFood(*playerPosList);
         food->resetFood();
+        myGM->incrementScore();
     }
     else
     {
