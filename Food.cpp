@@ -19,7 +19,7 @@ void Food::resetFood()
     foodGenerated = false;
 }
 
-void Food::generateFood(objPos blockOff)
+void Food::generateFood( objPosArrayList &playerPosList)
 {
 
     if (!foodGenerated)
@@ -28,8 +28,22 @@ void Food::generateFood(objPos blockOff)
         {
             rnx = rand() % (gameMechs.getBoardSizeX()-2)+1;
             rny = rand() % (gameMechs.getBoardSizeY()-2)+1;
+            
+            overlap = false;
+            objPos tempPos;
 
-        } while (rnx == blockOff.x && rny== blockOff.y);
+            for (int i =0 ; i<playerPosList.getSize(); i++)
+            {
+                playerPosList.getElement(tempPos,i);
+
+                if(tempPos.x == rnx && tempPos.y == rny)
+                {
+                    overlap = true;
+                    break;
+                }
+            }
+
+        } while (overlap);
 
         foodPos.setObjPos(rnx, rny, 'o');
         foodGenerated = true;

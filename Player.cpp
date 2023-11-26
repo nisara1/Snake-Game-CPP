@@ -21,11 +21,6 @@ Player::Player(GameMechs* thisGMRef)
     playerPosList->insertHead(tempPos);
 
 
-    playerPosList->insertHead(tempPos);
-    playerPosList->insertHead(tempPos);
-    playerPosList->insertHead(tempPos);
-    playerPosList->insertHead(tempPos);
-
 
 
 }
@@ -105,6 +100,7 @@ void Player::increasePlayerLength()
     objPos currHead;
     playerPosList->getHeadElement(currHead);
     playerPosList->insertHead(currHead);
+    playerPosList->removeTail();
 }
 
 void Player::movePlayer()
@@ -150,7 +146,7 @@ void Player::movePlayer()
     {
         increasePlayerLength();
 
-        food->generateFood(currHead);
+        food->generateFood(*playerPosList);
         food->resetFood();
     }
     else

@@ -97,6 +97,7 @@ void RunLogic(void)
     }
 
 
+    objPosArrayList* playerPos = player->getPlayerPos();
 
     player->updatePlayerDir();
     player->movePlayer();
@@ -104,10 +105,9 @@ void RunLogic(void)
 
 
 
-    objPos playerPos;
+    //objPos playerPos;
     //player->getPlayerPos(playerPos);
-
-    food->generateFood(playerPos);
+    food->generateFood(*playerPos);
 
 
 
@@ -173,7 +173,7 @@ void DrawScreen(void)
         MacUILib_printf("\n");
 
     }
-    MacUILib_printf("BoardSize: %dx%d\n, Score: %d\n",myGM->getBoardSizeX(), myGM->getBoardSizeY(),  myGM->getScore());
+    MacUILib_printf("BoardSize: %dx%d\n, Score: %d\n, FoodPos: (%d, %d), Snake Size: %d" ,myGM->getBoardSizeX(), myGM->getBoardSizeY(),  myGM->getScore(), foodPos.y, foodPos.x, playerBody->getSize());
 
 
 }

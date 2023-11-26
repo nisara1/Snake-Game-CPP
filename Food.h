@@ -14,13 +14,14 @@ class Food
         char foodSymbol;
         GameMechs &gameMechs;
         bool foodGenerated;
+        bool overlap;
 
 
     public:
         Food(GameMechs &gm);
         ~Food();
 
-        void generateFood(objPos blockOff); //need to upgrade this. Need to accept player body array list. Go through each array list element to make sure they are all blocked off from random food generation
+        void generateFood( objPosArrayList &playerPosList); //need to upgrade this. Need to accept player body array list. Go through each array list element to make sure they are all blocked off from random food generation
 
         void getFoodPos(objPos &returnPos);
 
