@@ -25,7 +25,7 @@ class Player
         void movePlayer();
         bool checkFoodConsumption();
         void increasePlayerLength();
-        bool checkSelfCollision();
+        bool checkSelfCollision(const objPos& headPos);
 
         // Need more actions
         // after inserting head and before removing tail

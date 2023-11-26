@@ -44,7 +44,6 @@ int main(void)
         DrawScreen();
         LoopDelay();
     }
-
     CleanUp();
 
 }
@@ -186,14 +185,14 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
+    MacUILib_clearScreen();
+    MacUILib_uninit();
+
     delete player;
 
     delete myGM;
 
     delete food;
-    MacUILib_clearScreen();    
-  
-    MacUILib_uninit();
 
 
 }

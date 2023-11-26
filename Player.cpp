@@ -104,22 +104,18 @@ void Player::increasePlayerLength()
     playerPosList->removeTail();
 }
 
-bool Player::checkSelfCollison()
+bool Player::checkSelfCollision(const objPos& headPos)
 {
-    objPos newHead;
-    objPos currHead;
-    playerPosList->getHeadElement(currHead);
 
-    for(int i = 0; i<playerPosList->getSize(); ++i)
+    for(int i = 1; i<playerPosList->getSize(); ++i)
     {
-        objPos BodyP;
-        playerPosList->getElement(BodyP, i);
-        if(currHead.x == bodyP.x && currHead.y == bodyP.y)
+        objPos currentPos;
+        playerPosList->getElement(currentPos, i);
+        if(headPos.x == currentPos.x && headPos.y == currentPos.y)
         {
             return true;
 
         }
-
     }
     return false;
 
@@ -162,6 +158,15 @@ void Player::movePlayer()
             break;     
     }
 
+    if(checkSelfCollision(currHead))
+    {
+        myGM->setLoseFlag();
+        myGM->setExitTrue();
+        MacUILib_printf("Game Over");
+        return;
+    }
+
+        
     playerPosList->insertHead(currHead);
 
     if(checkFoodConsumption())
@@ -177,10 +182,7 @@ void Player::movePlayer()
         playerPosList->removeTail();
     }
 
-    if(checkSelfCollison())
-    {
-        myGM->setLoseFlag();
-        myGM->setExitTrue();
-    }
+
+
 }
 
