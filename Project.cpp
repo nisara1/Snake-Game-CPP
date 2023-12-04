@@ -73,23 +73,23 @@ void RunLogic(void)
 {
     char input = myGM->getInput();
 
-    if(input == 27)
+    if(input == 27) //exit key
     {
         myGM -> setExitTrue();
     }
 
-    if (input == 'r') 
+    if (input == 'r') // debugging key
     {
         food->resetFood();
     }
 
-    if (input == 't')
+    if (input == 't') //debugging key
     {
         myGM->incrementScore();
         MacUILib_printf("score is:%d",myGM->getScore());
     }
 
-    if (input == 'y')
+    if (input == 'y') //debugging key
     {
         myGM->setLoseFlag();
         MacUILib_printf("better luck next time");
@@ -103,9 +103,6 @@ void RunLogic(void)
 
 
 
-
-    //objPos playerPos;
-    //player->getPlayerPos(playerPos);
     food->generateFood(*playerPos);
 
 
@@ -123,7 +120,6 @@ void DrawScreen(void)
     objPos tempBody;
     int i,j;
     objPos playerPos;
-    //player->getPlayerPos(playerPos);
 
     objPos foodPos;
     food->getFoodPos(foodPos);
@@ -187,7 +183,8 @@ void CleanUp(void)
 {
     MacUILib_clearScreen();
 
-    MacUILib_printf("Game Over, Better Luck Next Time");
+    MacUILib_printf("Game Over, Better Luck Next Time\n");
+    MacUILib_printf("Your Score Was: %d", myGM ->getScore());
     MacUILib_uninit();
 
     delete player;

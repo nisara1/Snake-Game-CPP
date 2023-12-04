@@ -14,11 +14,10 @@ Player::Player(GameMechs* thisGMRef)
     mainGameMechsRef = thisGMRef;
     myDir = STOP;
 
-    // more actions to be included
     objPos tempPos;
-    tempPos.setObjPos(mainGameMechsRef->getBoardSizeX()/2,  mainGameMechsRef->getBoardSizeY()/2, '*'); //simpler way can be written
+    tempPos.setObjPos(mainGameMechsRef->getBoardSizeX()/2,  mainGameMechsRef->getBoardSizeY()/2, '*');//gets initial position of the player
 
-    playerPosList = new objPosArrayList();
+    playerPosList = new objPosArrayList(); //creates player pos list on heap for movement
     playerPosList->insertHead(tempPos);
 
 
@@ -28,8 +27,7 @@ Player::Player(GameMechs* thisGMRef)
 
 Player::~Player()
 {
-// leave it empty for now
-    delete playerPosList;
+    delete playerPosList; //destroys heap array list afterwards
 }
 
 objPosArrayList* Player::getPlayerPos()
@@ -88,7 +86,7 @@ bool Player::checkFoodConsumption()
     objPos foodPos;
     food->getFoodPos(foodPos);
 
-    if(headpos.x==foodPos.x && headpos.y==foodPos.y)
+    if(headpos.x==foodPos.x && headpos.y==foodPos.y) 
     {
         return true;
     }
@@ -104,7 +102,7 @@ void Player::increasePlayerLength()
     playerPosList->removeTail();
 }
 
-bool Player::checkSelfCollision(const objPos& headPos)
+bool Player::checkSelfCollision(const objPos& headPos) //pass by value of the head position for head collision
 {
 
     for(int i = 1; i<playerPosList->getSize(); ++i)

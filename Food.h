@@ -9,23 +9,23 @@ class Food
 
     private:
         objPos foodPos;
-        int rnx;
-        int rny;
+        int rnx; //random x coordinate for generating food
+        int rny; //random y coordinate for generating food
         char foodSymbol;
-        GameMechs &gameMechs;
-        bool foodGenerated;
-        bool overlap;
+        GameMechs &gameMechs;//reference to game mechanics
+        bool foodGenerated; 
+        bool overlap; 
 
 
     public:
-        Food(GameMechs &gm);
+        Food(GameMechs &gm); //default constructor takes reference to game mechanics class
         ~Food();
 
-        void generateFood( objPosArrayList &playerPosList); //need to upgrade this. Need to accept player body array list. Go through each array list element to make sure they are all blocked off from random food generation
+        void generateFood( objPosArrayList &playerPosList); //for generating food and avoiding player position
 
-        void getFoodPos(objPos &returnPos);
+        void getFoodPos(objPos &returnPos); 
 
-        void resetFood();
+        void resetFood(); 
 
 
 
