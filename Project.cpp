@@ -184,7 +184,6 @@ void CleanUp(void)
     MacUILib_clearScreen();
 
     MacUILib_printf("Game Over, Better Luck Next Time\n");
-    MacUILib_printf("Your Score Was: %d", myGM ->getScore());
     MacUILib_uninit();
 
     delete player;
